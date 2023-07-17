@@ -1,11 +1,43 @@
-var todaysDate = dayjs().format('dddd, MMMM D YYYY'); 
-$("#currentDay").html(todaysDate);
+//gets the current time and date
+//not working??
+var currentDay = dayjs().format('dddd, MMMM D YYYY'); 
+var currentTime = dayjs().format('h:mm A')
+
+$("#currentDay").html(currentDay);
+$("#currentTime").html(currentTime);
 console.log(dayjs)
+
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-$(function () {
+$(document).ready(function () {
+
+  $(".saveBtn").on("click", function () {
+    //get value from textarea in html
+    var text = $(this).sibilings(".description").val();
+    //get the time block from hour id
+    var time = $(this).parent().attr("id");
+    console.log(text)
+    console.log(time)
+
+    localStorage.setItem(time, text);
+  })
+
+  function timeTracker() {
+    //gets the current hour
+    var timeNow = dayjs().hour();
+
+    //create array for current time to apply past, present, future class for each timeBlock
+    $(".time-block").each(function () {
+    
+      var blockTime = parseInt($(this).attr("id").split("hour")[1]);
+
+
+    
+    }
+
+  }
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
