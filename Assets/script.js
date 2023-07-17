@@ -1,11 +1,6 @@
 //gets the current time and date
 //not working??
-var currentDay = dayjs().format('dddd, MMMM D YYYY'); 
-var currentTime = dayjs().format('h:mm A')
 
-$("#currentDay").html(currentDay);
-$("#currentTime").html(currentTime);
-console.log(dayjs)
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
@@ -13,9 +8,17 @@ console.log(dayjs)
 
 $(document).ready(function () {
 
+var currentDay = dayjs().format('dddd, MMMM D YYYY'); 
+var currentTime = dayjs().format('h:mm A')
+
+$("#currentDay").html(currentDay);
+$("#currentTime").html(currentTime);
+console.log(dayjs)
+
+  //Jquery onclick event 
   $(".saveBtn").on("click", function () {
     //get value from textarea in html
-    var text = $(this).sibilings(".description").val();
+    var text = $(this).siblings(".description").val();
     //get the time block from hour id
     var time = $(this).parent().attr("id");
     console.log(text)
@@ -26,18 +29,36 @@ $(document).ready(function () {
 
   function timeTracker() {
     //gets the current hour
+    //can i use currentTime from global var?
     var timeNow = dayjs().hour();
 
     //create array for current time to apply past, present, future class for each timeBlock
     $(".time-block").each(function () {
-    
+        //take string value and return a number
+        //split hour id into an array
       var blockTime = parseInt($(this).attr("id").split("hour")[1]);
 
+      //add class according to current time of day
+      if(blockTime < timeNow) {
+        $(this).removeClass("future");
+        $(this).removeClass("present");
+        $(this).addClass("past");
+      }
+      else if(blockTime === timeNow) {
+        $(this).removeClass("future");
+        $(this).addClass("present");
+        $(this).removeClass("past");
+      }
+      else {
+        $(this).addClass("future");
+        $(this).removeClass("present");
+        $(this).removeClass("past");
+      }
 
-    
+})
     }
-
-  }
+    timeTracker();
+  });
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -56,4 +77,4 @@ $(document).ready(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
+
