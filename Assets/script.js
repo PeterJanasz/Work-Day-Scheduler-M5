@@ -8,12 +8,17 @@
 
 $(document).ready(function () {
   // TODO: Add code to display the current date in the header of the page.
-  var currentDay = dayjs().format('dddd, MMMM D YYYY');
-  var currentTime = dayjs().format('h:mm A')
+  function displayTimeDate() {
+    var currentDay = dayjs().format('dddd, MMMM D YYYY');
+    var currentTime = dayjs().format('h:mm A');
+  
+    $("#currentDay").html(currentDay);
+    $("#currentTime").html(currentTime);
+    console.log(dayjs)
+  }
+  
 
-  $("#currentDay").html(currentDay);
-  $("#currentTime").html(currentTime);
-  console.log(dayjs)
+  
 
   //Jquery onclick event (A)
   $(".saveBtn").on("click", function () {
@@ -68,6 +73,8 @@ $(document).ready(function () {
     }
   });
   timeTracker();
+  displayTimeDate();
+  setInterval(displayTimeDate, 1000);
 });
   // A) TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
