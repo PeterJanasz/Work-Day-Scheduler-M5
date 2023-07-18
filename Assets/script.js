@@ -74,6 +74,7 @@ $(document).ready(function () {
   });
   timeTracker();
   displayTimeDate();
+  //added interval to update disply time every second
   setInterval(displayTimeDate, 1000);
 });
   // A) TODO: Add a listener for click events on the save button. This code should
