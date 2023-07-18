@@ -1,5 +1,5 @@
 //gets the current time and date
-//not working??Moved inside $(doc).ready(func)
+//stopped working??Moved inside $(doc).ready(func)
 
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
@@ -7,7 +7,7 @@
 // in the html.
 
 $(document).ready(function () {
-// TODO: Add code to display the current date in the header of the page.
+  // TODO: Add code to display the current date in the header of the page.
   var currentDay = dayjs().format('dddd, MMMM D YYYY');
   var currentTime = dayjs().format('h:mm A')
 
@@ -57,15 +57,16 @@ $(document).ready(function () {
 
     })
   }
-//retrieve local storage input
-$(".time-block").each(function () {
-var time = $(this).attr("id");
-var savedText = localStorage.getItem(time);
+  //retrieve local storage input (C)
+  $(".time-block").each(function () {
+    var time = $(this).attr("id");
+    var savedText = localStorage.getItem(time);
 
-if (savedText !== null) {
-  $(this).find(".description").val(savedText);
-}
-});
+    //add local storage input text to appropriate discription class in html
+    if (savedText !== null) {
+      $(this).find(".description").val(savedText);
+    }
+  });
   timeTracker();
 });
   // A) TODO: Add a listener for click events on the save button. This code should
@@ -85,5 +86,5 @@ if (savedText !== null) {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-  
+
 
